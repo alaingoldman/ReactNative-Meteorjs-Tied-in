@@ -12,10 +12,10 @@ class Aboutios extends React.Component {
 	render() {
 		return(
 		  <View>
-			<Text>
-				about page bro
-			</Text>
-	      </View>
+			    <Text>
+				    about page bro
+			    </Text>
+	    </View>
 		)
 	}
 };

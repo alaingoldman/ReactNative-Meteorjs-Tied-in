@@ -11,25 +11,40 @@ var {
 } = React;
 
 var Aboutios = require('./Aboutios');
+import ddpClient from './ddpClient';
+import Accounts from './accounts';
+
 
 class Homeios extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			email: 'alain.goldman@gmail.com',
-			password: 'quilava1'
+			password: 'red123',
+			alert: " ",
+			loaded: true,
 		}
 	}
 
-	_goToAbout(){
-		this.props.navigator.push({
-			title: "About",
-			component: Aboutios
-		});
-	}
 
 	_handlePress(){
-		alert(this.state.email);
+		ddpClient.initialize()
+		  .then((res) => {
+		  	return Accounts.signIn(this.state.email.toLowerCase(), this.state.password.toLowerCase());
+		  })
+		  .then((res) => {
+		  	console.log("Logged in successfull");
+		  	this.props.navigator.push({
+		  		title: "About",
+		  		component: Aboutios
+		  	});
+		  })
+		  .catch((err) => {
+		    console.log(err);
+		    var newState = {};
+		    newState["alert"] = err.reason;
+		    return this.setState(newState);
+		  })
 	}
 
 	_handleChange(x, event) {
@@ -44,14 +59,11 @@ class Homeios extends React.Component {
 			    <Text style={styles.larger}>
 					Home page
 			  	</Text>
-			  	<Text 
-			  	    onPress={this._goToAbout.bind(this)}
-			  	    style={styles.link} >
-			  	    Next page ?
-			  	</Text>
-
 			  	<Text style={styles.title}> 
-			  		Login bitch
+			  		Login broheim
+			  	</Text>
+			  	<Text style={styles.alert}>
+			  	 	{this.state.alert}
 			  	</Text>
 				<TextInput 
 				    style={styles.input} 
@@ -86,14 +98,14 @@ class Homeios extends React.Component {
 
 
 var styles = StyleSheet.create({
-  link: {
-  	color: "blue",
-  },
   larger: {
     fontSize: 29,
   },
   backBlue: {
   	flex: 1,
+  },
+  alert:{
+  	color: 'red',
   },
   input: {
   	height: 40, 
@@ -112,10 +124,14 @@ var styles = StyleSheet.create({
   	width: 280,
   	marginTop: 10,
   	height: 60,
+  	justifyContent: 'center',
+  	alignItems: "center",
   },
   buttInner: {
   	color: "white",
   	fontSize: 30,
+  	justifyContent: 'center',
+
   }
 });
 
