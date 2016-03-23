@@ -5,14 +5,14 @@ var {
   Text,
   View,
   StyleSheet,
-  NavigatorIOS,
   TextInput,
   TouchableHighlight,
 } = React;
 
-var Aboutios = require('./Aboutios');
+import Aboutios from './Aboutios';
 import ddpClient from './ddpClient';
 import Accounts from './accounts';
+import NavigationBar from 'react-native-navbar'; 
 
 
 class Homeios extends React.Component {
@@ -35,7 +35,6 @@ class Homeios extends React.Component {
 		  .then((res) => {
 		  	console.log("Logged in successfull");
 		  	this.props.navigator.push({
-		  		title: "About",
 		  		component: Aboutios
 		  	});
 		  })
@@ -54,8 +53,22 @@ class Homeios extends React.Component {
 	}
 
 	render() {
+		const rightButtonConfig = {
+		  title: '',
+		  handler: () => alert('hello!'),
+		}
+
+		const titleConfig = {
+		  title: 'lootfly',
+		  tintColor: "white",
+		}
 		return(
 			<View style={styles.backBlue}>
+				<NavigationBar
+				  style={styles.container}
+				  title={titleConfig}
+				  tintColor="black"
+				  rightButton={rightButtonConfig} />
 			    <Text style={styles.larger}>
 					Home page
 			  	</Text>

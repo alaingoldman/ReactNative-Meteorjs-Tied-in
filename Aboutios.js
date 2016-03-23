@@ -7,11 +7,24 @@ var {
   StyleSheet,
 } = React;
 
+
+import NavigationBar from 'react-native-navbar'; 
+
 class Aboutios extends React.Component {
 
 	render() {
+
+    const titleConfig = {
+      title: 'lootfly',
+      tintColor: "white",
+    }
+
 		return(
 		  <View>
+      <NavigationBar
+        style={{ flex: 1, }}
+        title={titleConfig}
+        tintColor="black" />
 			    <Text>
 				    about page bro
 			    </Text>
