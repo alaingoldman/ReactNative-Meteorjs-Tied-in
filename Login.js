@@ -34,7 +34,9 @@ class Login extends React.Component {
 	_handlePress(){
 		ddpClient.initialize()
 		  .then((res) => {
-		  	return Accounts.signIn(this.state.email.toLowerCase(), this.state.password);
+		  	return Accounts.signIn(
+		  		this.state.email.toLowerCase(), 
+		  		this.state.password );
 		  })
 		  .then((res) => {
 		  	console.log("Logged in successfull");
