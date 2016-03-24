@@ -8,6 +8,7 @@ var {
 } = React;
 
 
+
 import NavigationBar from 'react-native-navbar'; 
 
 class Aboutios extends React.Component {
@@ -20,7 +21,7 @@ class Aboutios extends React.Component {
     }
 
 		return(
-		  <View>
+		  <View style={styles.container}>
       <NavigationBar
         style={{ flex: 1, }}
         title={titleConfig}

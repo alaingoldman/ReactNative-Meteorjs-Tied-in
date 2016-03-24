@@ -9,13 +9,14 @@ var {
   TouchableHighlight,
 } = React;
 
-import Aboutios from './Aboutios';
+import Register from  './Register';
+import ResetPass from './ResetPass';
 import ddpClient from './ddpClient';
-import Accounts from './accounts';
+import Accounts from  './accounts';
 import NavigationBar from 'react-native-navbar'; 
 
 
-class Homeios extends React.Component {
+class Login extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -26,6 +27,9 @@ class Homeios extends React.Component {
 		}
 	}
 
+	componentWillUnmount() {
+	  ddpClient.close();
+	} 
 
 	_handlePress(){
 		ddpClient.initialize()
@@ -52,28 +56,37 @@ class Homeios extends React.Component {
 		this.setState(newState);
 	}
 
-	render() {
-		const rightButtonConfig = {
-		  title: '',
-		  handler: () => alert('hello!'),
-		}
+	linkToReg(){
+		this.props.navigator.push({
+			component: Register
+		});
+	}
 
-		const titleConfig = {
-		  title: 'lootfly',
-		  tintColor: "white",
-		}
+	linkToReset(){
+		this.props.navigator.push({
+			component: ResetPass
+		});
+	}
+
+	render() {
+		// inside of navigationbar component  rightButton={rightButtonConfig}
+		// const rightButtonConfig = {
+		//   title: '',
+		//   handler: () => alert('hello!'),
+		// }
+
+		const titleConfig =
+			<View>
+		      <Text style={styles.navTitleText}>login</Text>
+		  	</View>;
 		return(
 			<View style={styles.backBlue}>
 				<NavigationBar
 				  style={styles.container}
 				  title={titleConfig}
-				  tintColor="black"
-				  rightButton={rightButtonConfig} />
-			    <Text style={styles.larger}>
-					Home page
-			  	</Text>
+				  tintColor="black" />
 			  	<Text style={styles.title}> 
-			  		Login broheim
+			  		Login
 			  	</Text>
 			  	<Text style={styles.alert}>
 			  	 	{this.state.alert}
@@ -85,14 +98,12 @@ class Homeios extends React.Component {
 				    onChange={this._handleChange.bind(this,"email")}
 				    autoCorrect={false}
 				    placeholder="email"/>
-
 				<TextInput 
 				    style={styles.input} 
 				    placeholder="password"
 				    onChange={this._handleChange.bind(this,"password")}
 				    value={this.state.password}
 				    secureTextEntry={true}/>
-
 				<TouchableHighlight
 				    onPress={this._handlePress.bind(this)}
 				    style={styles.butt}
@@ -102,7 +113,17 @@ class Homeios extends React.Component {
 				  	click
 				  </Text>
 				</TouchableHighlight>
+				<Text 
+				  style={styles.link}
+				  onPress={this.linkToReg.bind(this)}>
+				   Register
+				</Text>
 
+				<Text 
+				  style={styles.link}
+				  onPress={this.linkToReset.bind(this)}>
+				   Reset Password
+				</Text>
 			</View>
 
 		)
@@ -112,8 +133,10 @@ class Homeios extends React.Component {
 
 
 var styles = StyleSheet.create({
-  larger: {
-    fontSize: 29,
+  navTitleText: {
+  	color: "white",
+  	fontSize: 18,
+  	marginBottom: 3.5,
   },
   backBlue: {
   	flex: 1,
@@ -146,8 +169,11 @@ var styles = StyleSheet.create({
   	color: "white",
   	fontSize: 30,
   	justifyContent: 'center',
-
+  },
+  link: {
+  	color: "blue",
+  	marginTop: 10,
   }
 });
 
-module.exports = Homeios;
+module.exports = Login;

@@ -9,13 +9,14 @@ var {
   TouchableHighlight,
 } = React;
 
+import Login from './Login';
 import Aboutios from './Aboutios';
 import ddpClient from './ddpClient';
 import Accounts from './accounts';
 import NavigationBar from 'react-native-navbar'; 
 
 
-class Homeios extends React.Component {
+class Register extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -53,27 +54,29 @@ class Homeios extends React.Component {
 	}
 
 	render() {
-		const rightButtonConfig = {
-		  title: '',
-		  handler: () => alert('hello!'),
+		const leftButtonConfig = {
+		  title: 'login',
+		  tintColor: "white",
+		  handler: () => {
+		  	this.props.navigator.pop();
+		  	
+		  },
 		}
 
-		const titleConfig = {
-		  title: 'lootfly',
-		  tintColor: "white",
-		}
+		const titleConfig =
+			<View>
+		      <Text style={styles.navTitleText}>register</Text>
+		  	</View>;
+		
 		return(
 			<View style={styles.backBlue}>
 				<NavigationBar
 				  style={styles.container}
 				  title={titleConfig}
 				  tintColor="black"
-				  rightButton={rightButtonConfig} />
-			    <Text style={styles.larger}>
-					Home page
-			  	</Text>
-			  	<Text style={styles.title}> 
-			  		Login broheim
+				  leftButton={leftButtonConfig} />
+			    <Text style={styles.title}>
+					Register
 			  	</Text>
 			  	<Text style={styles.alert}>
 			  	 	{this.state.alert}
@@ -112,6 +115,11 @@ class Homeios extends React.Component {
 
 
 var styles = StyleSheet.create({
+  navTitleText: {
+  	color: "white",
+  	fontSize: 18,
+  	marginBottom: 3.5,
+  },
   larger: {
     fontSize: 29,
   },
@@ -150,4 +158,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = Homeios;
+module.exports = Register;
