@@ -21,8 +21,9 @@ class Register extends React.Component {
 		super(props);
 		this.state = {
 			email: 'alain.goldman@gmail.com',
+			username: "",
 			password: 'red123',
-			alert: " ",
+			alert: "",
 			loaded: true,
 		}
 	}
@@ -81,6 +82,14 @@ class Register extends React.Component {
 			  	<Text style={styles.alert}>
 			  	 	{this.state.alert}
 			  	</Text>
+			  	<TextInput 
+			  	    style={styles.input} 
+			  	    keyboardType='default'
+			  	    value={this.state.username}
+			  	    onChange={this._handleChange.bind(this,"username")}
+			  	    autoCorrect={false}
+			  	    placeholder="username"/>
+
 				<TextInput 
 				    style={styles.input} 
 				    keyboardType='email-address'
