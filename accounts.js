@@ -84,6 +84,10 @@ Accounts.signUp = (email, password) => {
     });
 };
 
+Accounts.emailVerify = (email) => {
+  return ddpClient.call('emailUserVerification', [email])
+};
+
 Accounts.forgotPass = (email) => {
   return new Promise((resolve, reject) => {
     ddpClient.call("resetPass", [email], (err, res) => {
@@ -96,5 +100,24 @@ Accounts.forgotPass = (email) => {
     resolve(true);
   });
 };
+
+Accounts.signUpWithUsername = (username, email, password) => {
+  return new Promise((resolve, reject) => {
+    let options = {
+      "username": username,
+      "email": email,
+      "password": password
+    }
+    ddpClient.connection.call("registerUsers", [options], (error) => {
+      if (error){
+        reject(error);
+      }else{
+        resolve(true);
+      }
+      reject(undefined);
+    });
+  });
+};
+
 
 module.exports = Accounts;

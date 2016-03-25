@@ -28,21 +28,26 @@ class Register extends React.Component {
 		}
 	}
 
-
 	_handlePress(){
 		ddpClient.initialize()
-		  .then((res) => {
-		  	return Accounts.signIn(this.state.email.toLowerCase(), this.state.password.toLowerCase());
+		  .then(() => {
+		  	return Accounts.signUpWithUsername(
+		  		this.state.username.toLowerCase(),
+		  		this.state.email.toLowerCase(),
+		  		this.state.password
+		  		);
 		  })
-		  .then((res) => {
-		  	console.log("Logged in successfull");
-		  	this.props.navigator.push({
-		  		component: Aboutios
-		  	});
+		  .then(() => {
+		  	return Accounts.emailVerify(
+		  		this.state.email.toLowerCase());
+		  })
+		  .then(() => {
+		  	let newState = {};
+		  	newState["alert"] = "Check your email for confirmation link";
+		  	return this.setState(newState);
 		  })
 		  .catch((err) => {
-		    console.log(err);
-		    var newState = {};
+		    let newState = {};
 		    newState["alert"] = err.reason;
 		    return this.setState(newState);
 		  })
