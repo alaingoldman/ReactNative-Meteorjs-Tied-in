@@ -32,10 +32,11 @@ class ResetPass extends React.Component {
 		  	return Accounts.forgotPass(this.state.email.toLowerCase());
 		  })
 		  .then((res) => {
-		  	alert("Email sent");
+		  	var newState = {};
+		  	newState["alert"] = "reset sent to email";
+		  	return this.setState(newState);
 		  })
 		  .catch((err) => {
-		    console.log(err);
 		    var newState = {};
 		    newState["alert"] = err.reason;
 		    return this.setState(newState);
