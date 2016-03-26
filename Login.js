@@ -58,15 +58,9 @@ class Login extends React.Component {
 		this.setState(newState);
 	}
 
-	linkToReg(){
+	_linker(comp){
 		this.props.navigator.push({
-			component: Register
-		});
-	}
-
-	linkToReset(){
-		this.props.navigator.push({
-			component: ResetPass
+			component: comp
 		});
 	}
 
@@ -117,13 +111,13 @@ class Login extends React.Component {
 				</TouchableHighlight>
 				<Text 
 				  style={styles.link}
-				  onPress={this.linkToReg.bind(this)}>
+				  onPress={this._linker.bind(this, Register)}>
 				   Register
 				</Text>
 
 				<Text 
 				  style={styles.link}
-				  onPress={this.linkToReset.bind(this)}>
+				  onPress={this._linker.bind(this, ResetPass)}>
 				   Reset Password
 				</Text>
 			</View>
