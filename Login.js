@@ -29,7 +29,7 @@ class Login extends React.Component {
 
 	componentWillUnmount() {
 	  ddpClient.close();
-	} 
+	}
 
 	_handlePress(){
 		ddpClient.initialize()
