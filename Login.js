@@ -7,10 +7,10 @@ var {
   StyleSheet,
   TextInput,
   TouchableHighlight,
+  Image,
 } = React;
 
 import Register from  './Register';
-import ResetPass from './ResetPass';
 import ddpClient from './ddpClient';
 import Accounts from  './accounts';
 import NavigationBar from 'react-native-navbar'; 
@@ -65,62 +65,67 @@ class Login extends React.Component {
 	}
 
 	render() {
-		// inside of navigationbar component  rightButton={rightButtonConfig}
-		// const rightButtonConfig = {
-		//   title: '',
-		//   handler: () => alert('hello!'),
-		// }
-
 		const titleConfig =
 			<View>
-		      <Text style={styles.navTitleText}>login</Text>
+		      <Text style={styles.navTitleText}></Text>
 		  	</View>;
-		return(
-			<View style={styles.backBlue}>
-				<NavigationBar
-				  style={styles.container}
-				  title={titleConfig}
-				  tintColor="black" />
-			  	<Text style={styles.title}> 
-			  		Login
-			  	</Text>
-			  	<Text style={styles.alert}>
-			  	 	{this.state.alert}
-			  	</Text>
-				<TextInput 
-				    style={styles.input} 
-				    keyboardType='email-address'
-				    value={this.state.email}
-				    onChange={this._handleChange.bind(this,"email")}
-				    autoCorrect={false}
-				    placeholder="email"/>
-				<TextInput 
-				    style={styles.input} 
-				    placeholder="password"
-				    onChange={this._handleChange.bind(this,"password")}
-				    value={this.state.password}
-				    secureTextEntry={true}/>
-				<TouchableHighlight
-				    onPress={this._handlePress.bind(this)}
-				    style={styles.butt}
-				    activeOpacity={1}
-				    underlayColor='#0d0d0d'>
-				  <Text style={styles.buttInner}>
-				  	click
-				  </Text>
-				</TouchableHighlight>
-				<Text 
-				  style={styles.link}
-				  onPress={this._linker.bind(this, Register)}>
-				   Register
-				</Text>
 
-				<Text 
-				  style={styles.link}
-				  onPress={this._linker.bind(this, ResetPass)}>
-				   Reset Password
-				</Text>
-			</View>
+		return(
+			<Image source={require('./sweater.png')} style={styles.container}>
+				<NavigationBar
+				  title={titleConfig}
+				  tintColor="transparent"/>
+				<View style={styles.wrap}>
+				    <Image 
+				      resizeMode="cover"
+				      source={require('./logoalt.png')} 
+				      style={styles.logo}/>
+					<View style={styles.introTextWrap}>
+						<Text style={styles.introText}>
+							Lootfly is the premier marketplace for fashion
+						</Text>
+						<Text style={styles.introText}>
+							Login to start buying and selling
+						</Text>
+					</View>
+				  	<Text style={styles.alert}>
+				  	 	{this.state.alert}
+				  	</Text>
+				  	<View style={styles.boxer}>
+				  		<Text style={styles.inputTitle}>E-mail</Text>
+					    <TextInput 
+						    style={styles.input} 
+						    keyboardType='email-address'
+						    value={this.state.email}
+						    onChange={this._handleChange.bind(this,"email")}
+						    autoCorrect={false} />
+					</View>
+					<View style={styles.boxer}>
+					    <Text style={styles.inputTitle}>Password</Text>
+						<TextInput 
+						    style={styles.input} 
+						    onChange={this._handleChange.bind(this,"password")}
+						    value={this.state.password}
+						    secureTextEntry={true}/>
+					</View>
+					<TouchableHighlight
+					    onPress={this._handlePress.bind(this)}
+					    style={styles.butt}
+					    activeOpacity={1}
+					    underlayColor='#0d0d0d'>
+					  <Text style={styles.buttInner}>
+					  	LOGIN
+					  </Text>
+					</TouchableHighlight>
+					<View style={styles.bot}>
+						<Text 
+						  style={styles.link}
+						  onPress={this._linker.bind(this, Register)}>
+						   REGISTER
+						</Text>
+					</View>
+				</View>
+			</Image>
 
 		)
 	}
@@ -129,46 +134,78 @@ class Login extends React.Component {
 
 
 var styles = StyleSheet.create({
-  navTitleText: {
-  	color: "white",
-  	fontSize: 18,
-  	marginBottom: 3.5,
+  logo: {
+  	alignSelf: "center",
+  	width: 40,
+  	height: 40,
+  	marginTop: 25,
   },
-  backBlue: {
+  introText: {
+  	color: "white",
+  	fontSize: 11,
+  },
+  introTextWrap: {
+  	marginTop: 40,
+  	paddingBottom: 10,
+  	alignItems: "center",
+  },
+  wrap: {
+	flex: 1,
+	width: 280,
+  },
+  boxer: {
+  	borderBottomWidth: 1,
+  	borderColor: "white",
+  	marginBottom: 16,
+  },
+  container: {
+    flex: 1,
+    width: null,
+    height: null,
+    alignItems: "center",
+  },	
+  header: {
   	flex: 1,
-  	backgroundColor: "white",
   },
   alert:{
   	color: 'red',
   },
   input: {
-  	height: 40, 
+  	height: 35, 
   	borderColor: 'gray', 
-  	borderWidth: 1, 
-  	width: 280, 
+  	borderBottomWidth: 1, 
   	marginTop: 10,
+  	color: "white",
   },
-  title: {
-  	fontSize: 30,
-  	marginTop: 20,
-  	marginBottom: 10,
+  inputTitle: {
+  	color: "rgba(255,255,255,0.4)",
+  	fontSize: 12,
+  	height: 12,
   },
   butt: {
-  	backgroundColor: "black",
-  	width: 280,
-  	marginTop: 10,
-  	height: 60,
+  	backgroundColor: "white",
+  	marginTop: 17,
+  	height: 40,
   	justifyContent: 'center',
   	alignItems: "center",
   },
   buttInner: {
-  	color: "white",
-  	fontSize: 30,
+  	color: "black",
+  	fontSize: 11,
   	justifyContent: 'center',
   },
   link: {
-  	color: "blue",
+  	color: "white",
   	marginTop: 10,
+  	alignSelf: "center",
+  },
+  bot: {
+  	width: 280,
+  	position: "absolute",
+  	alignSelf: "center",
+  	alignItems: "center",
+  	bottom: 0,
+  	paddingBottom: 20,
   }
 });
 
