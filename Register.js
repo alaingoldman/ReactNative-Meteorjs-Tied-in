@@ -7,10 +7,12 @@ var {
   StyleSheet,
   TextInput,
   TouchableHighlight,
+  Image,
 } = React;
 
 import Login from './Login';
 import Aboutios from './Aboutios';
+import ResetPass from './ResetPass'
 import ddpClient from './ddpClient';
 import Accounts from './accounts';
 import NavigationBar from 'react-native-navbar'; 
@@ -21,13 +23,12 @@ class Register extends React.Component {
 		super(props);
 		this.state = {
 			email: 'alain.goldman@gmail.com',
-			username: "",
+			username: "iceman",
 			password: 'red123',
 			alert: "",
 			loaded: true,
 		}
 	}
-
 	_handlePress(){
 		ddpClient.initialize()
 		  .then(() => {
@@ -52,76 +53,91 @@ class Register extends React.Component {
 		    return this.setState(newState);
 		  })
 	}
-
 	_handleChange(x, event) {
 		var newState = {};
 		newState[x] = event.nativeEvent.text;
 		this.setState(newState);
 	}
-
+	_linker(comp){
+		this.props.navigator.push({
+			component: comp
+		});
+	}
+	_goBack(){
+		this.props.navigator.pop();
+	}
 	render() {
-		const leftButtonConfig = {
-		  title: 'login',
-		  tintColor: "white",
-		  handler: () => {
-		  	this.props.navigator.pop();
-		  	
-		  },
-		}
+
+		const leftButtonConfig = 
+			<View>
+		      <Text style={styles.whiteArrow} onPress={this._goBack.bind(this)} > {'<'} </Text>
+		  	</View>;
 
 		const titleConfig =
 			<View>
-		      <Text style={styles.navTitleText}>register</Text>
+		      <Text style={styles.navTitleText}>Registration</Text>
 		  	</View>;
-		
+
 		return(
-			<View style={styles.backBlue}>
+			<Image source={require('./reg.png')} style={styles.container}>
+				<View style={styles.navbar}>
 				<NavigationBar
-				  style={styles.container}
-				  title={titleConfig}
-				  tintColor="black"
-				  leftButton={leftButtonConfig} />
-			    <Text style={styles.title}>
-					Register
-			  	</Text>
-			  	<Text style={styles.alert}>
-			  	 	{this.state.alert}
-			  	</Text>
-			  	<TextInput 
-			  	    style={styles.input} 
-			  	    keyboardType='default'
-			  	    value={this.state.username}
-			  	    onChange={this._handleChange.bind(this,"username")}
-			  	    autoCorrect={false}
-			  	    placeholder="username"/>
-
-				<TextInput 
-				    style={styles.input} 
-				    keyboardType='email-address'
-				    value={this.state.email}
-				    onChange={this._handleChange.bind(this,"email")}
-				    autoCorrect={false}
-				    placeholder="email"/>
-
-				<TextInput 
-				    style={styles.input} 
-				    placeholder="password"
-				    onChange={this._handleChange.bind(this,"password")}
-				    value={this.state.password}
-				    secureTextEntry={true}/>
-
-				<TouchableHighlight
-				    onPress={this._handlePress.bind(this)}
-				    style={styles.butt}
-				    activeOpacity={1}
-				    underlayColor='#0d0d0d'>
-				  <Text style={styles.buttInner}>
-				  	click
-				  </Text>
-				</TouchableHighlight>
-
-			</View>
-
+				    title={titleConfig}
+				    tintColor="transparent"
+				    leftButton={leftButtonConfig} />
+				</View>
+				<View style={styles.midder}>
+					<View style={styles.wrap}>
+					  	<Text style={styles.alert}>
+					  	 	{this.state.alert}
+					  	</Text>
+					  	<View style={styles.boxer}>
+					  		<Text style={styles.inputTitle}>Username</Text>
+							<TextInput 
+							    style={styles.input} 
+							    keyboardType='default'
+							    value={this.state.username}
+							    onChange={this._handleChange.bind(this,"username")}
+							    autoCorrect={false} />
+						</View>
+					  	<View style={styles.boxer}>
+					  		<Text style={styles.inputTitle}>E-mail</Text>
+							<TextInput 
+							    style={styles.input} 
+							    keyboardType='email-address'
+							    value={this.state.email}
+							    onChange={this._handleChange.bind(this,"email")}
+							    autoCorrect={false} />
+						</View>
+						<View style={styles.boxer}>
+						    <Text style={styles.inputTitle}>Password</Text>
+							<TextInput 
+							    style={styles.input} 
+							    onChange={this._handleChange.bind(this,"password")}
+							    value={this.state.password}
+							    secureTextEntry={true}/>
+						</View>
+						<TouchableHighlight
+						    onPress={this._handlePress.bind(this)}
+						    style={styles.butt}
+						    activeOpacity={1}
+						    underlayColor='#0d0d0d'>
+						  <Text style={styles.buttInner}>
+						  	REGISTER
+						  </Text>
+						</TouchableHighlight>
+					</View>
+				</View>
+				<View style={styles.wrap}>
+					<View style={styles.bot}>
+						<Text 
+						  style={styles.link}
+						  onPress={this._linker.bind(this, ResetPass)}>
+						   RESET PASSWORD
+						</Text>
+					</View>
+				</View>
+			</Image>
 		)
 	}
 };
@@ -129,6 +145,37 @@ class Register extends React.Component {
 
 
 var styles = StyleSheet.create({
+  navbar: {
+  	alignSelf: "stretch",
+  },
+  midder: {
+  	alignItems: "center",
+  },
+  navy: {
+  	flex: 1,
+  	backgroundColor: "red",
+  },
+  wrap: {
+  	flex: 1,
+  	width: 280,
+  },
+  boxer: {
+    borderBottomWidth: 1,
+    borderColor: "white",
+    marginBottom: 16,
+  },
+  container: {
+    flex: 1,
+    width: null,
+    height: null,
+    alignItems: "center",
+  },	
+  whiteArrow: {
+  	color: "white",
+  	fontSize: 22,
+  	marginTop: -5,
+  	marginLeft: 10,
+  },
   navTitleText: {
   	color: "white",
   	fontSize: 18,
@@ -145,30 +192,40 @@ var styles = StyleSheet.create({
   	color: 'red',
   },
   input: {
-  	height: 40, 
+  	height: 35, 
   	borderColor: 'gray', 
-  	borderWidth: 1, 
-  	width: 280, 
+  	borderBottomWidth: 1, 
   	marginTop: 10,
+  	color: "white",
   },
-  title: {
-  	fontSize: 30,
-  	marginTop: 20,
-  	marginBottom: 10,
+  inputTitle: {
+  	color: "rgba(255,255,255,0.4)",
+  	fontSize: 12,
+  	height: 12,
   },
   butt: {
-  	backgroundColor: "black",
-  	width: 280,
-  	marginTop: 10,
-  	height: 60,
+  	backgroundColor: "rgb(14,185,125)",
+  	marginTop: 17,
+  	height: 40,
   	justifyContent: 'center',
   	alignItems: "center",
   },
   buttInner: {
   	color: "white",
-  	fontSize: 30,
+  	fontSize: 11,
   	justifyContent: 'center',
-
+  },
+  link: {
+  	color: "white",
+  	marginTop: 10,
+  },
+  bot: {
+  	width: 280,
+  	position: "absolute",
+  	alignSelf: "center",
+  	alignItems: "center",
+  	bottom: 0,
+  	paddingBottom: 20,
   }
 });
 
