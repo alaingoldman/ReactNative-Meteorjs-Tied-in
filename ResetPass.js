@@ -7,6 +7,7 @@ var {
   StyleSheet,
   TextInput,
   TouchableHighlight,
+  Image,
 } = React;
 
 import Login from './Login';
@@ -48,54 +49,59 @@ class ResetPass extends React.Component {
 		newState[x] = event.nativeEvent.text;
 		this.setState(newState);
 	}
-
+	_goBack(){
+		this.props.navigator.pop();
+	}
 	render() {
-		const leftButtonConfig = {
-		  title: 'login',
-		  tintColor: "white",
-		  handler: () => {
-		  	this.props.navigator.pop();
-		  	
-		  },
-		}
+		const leftButtonConfig = 
+			<View>
+		      <Text style={styles.whiteArrow} onPress={this._goBack.bind(this)} > {'<'} </Text>
+		  	</View>;
 
 		const titleConfig =
 			<View>
-		      <Text style={styles.navTitleText}>reset</Text>
+		      <Text style={styles.navTitleText}>Registration</Text>
 		  	</View>;
+
+
 		return(
-			<View style={styles.backBlue}>
+			<Image source={require('./sweater.png')} style={styles.container}>
+				<View style={styles.navbar}>
 				<NavigationBar
-				  style={styles.container}
-				  title={titleConfig}
-				  tintColor="black"
-				  leftButton={leftButtonConfig} />
-			    <Text style={styles.title}>
-					Reset
-			  	</Text>
-			  	<Text style={styles.alert}>
-			  	 	{this.state.alert}
-			  	</Text>
-				<TextInput 
-				    style={styles.input} 
-				    keyboardType='email-address'
-				    value={this.state.email}
-				    onChange={this._handleChange.bind(this,"email")}
-				    autoCorrect={false}
-				    placeholder="email"/>
-
-				<TouchableHighlight
-				    onPress={this._handlePress.bind(this)}
-				    style={styles.butt}
-				    activeOpacity={1}
-				    underlayColor='#0d0d0d'>
-				  <Text style={styles.buttInner}>
-				  	click
-				  </Text>
-				</TouchableHighlight>
-
-			</View>
-
+				    title={titleConfig}
+				    tintColor="transparent"
+				    leftButton={leftButtonConfig} />
+				</View>
+				<View style={styles.midder}>
+					<View style={styles.wrap}>
+					  	<Text style={styles.alert}>
+					  	 	{this.state.alert}
+					  	</Text>
+					  	<View style={styles.boxer}>
+					  		<Text style={styles.inputTitle}>E-mail</Text>
+							<TextInput 
+							    style={styles.input} 
+							    keyboardType='email-address'
+							    value={this.state.email}
+							    onChange={this._handleChange.bind(this,"email")}
+							    autoCorrect={false} />
+						</View>
+						
+						<TouchableHighlight
+						    onPress={this._handlePress.bind(this)}
+						    style={styles.butt}
+						    activeOpacity={1}
+						    underlayColor='#0d0d0d'>
+						  <Text style={styles.buttInner}>
+						  	REGISTER
+						  </Text>
+						</TouchableHighlight>
+						<Text style={styles.introText}>
+							Reset instructions will be emailed to you
+						</Text>
+					</View>
+				</View>
+			</Image>
 		)
 	}
 };
@@ -103,6 +109,44 @@ class ResetPass extends React.Component {
 
 
 var styles = StyleSheet.create({
+  navbar: {
+  	alignSelf: "stretch",
+  },
+  midder: {
+  	alignItems: "center",
+  	marginTop: 20,
+  },
+  navy: {
+  	flex: 1,
+  	backgroundColor: "red",
+  },
+  wrap: {
+  	flex: 1,
+  	width: 280,
+  },
+  boxer: {
+    borderBottomWidth: 1,
+    borderColor: "white",
+    marginBottom: 16,
+  },
+  container: {
+    flex: 1,
+    width: null,
+    height: null,
+    alignItems: "center",
+  },	
+  introText: {
+  	color: "white",
+  	fontSize: 11,
+  	alignSelf: "center",
+  	marginTop: 17,
+  },
+  whiteArrow: {
+  	color: "white",
+  	fontSize: 22,
+  	marginTop: -5,
+  	marginLeft: 10,
+  },
   navTitleText: {
   	color: "white",
   	fontSize: 18,
@@ -119,30 +163,40 @@ var styles = StyleSheet.create({
   	color: 'red',
   },
   input: {
-  	height: 40, 
+  	height: 35, 
   	borderColor: 'gray', 
-  	borderWidth: 1, 
-  	width: 280, 
+  	borderBottomWidth: 1, 
   	marginTop: 10,
+  	color: "white",
   },
-  title: {
-  	fontSize: 30,
-  	marginTop: 20,
-  	marginBottom: 10,
+  inputTitle: {
+  	color: "rgba(255,255,255,0.4)",
+  	fontSize: 12,
+  	height: 12,
   },
   butt: {
-  	backgroundColor: "black",
-  	width: 280,
-  	marginTop: 10,
-  	height: 60,
+  	backgroundColor: "rgb(14,185,125)",
+  	marginTop: 17,
+  	height: 40,
   	justifyContent: 'center',
   	alignItems: "center",
   },
   buttInner: {
   	color: "white",
-  	fontSize: 30,
+  	fontSize: 11,
   	justifyContent: 'center',
-
+  },
+  link: {
+  	color: "white",
+  	marginTop: 10,
+  },
+  bot: {
+  	width: 280,
+  	position: "absolute",
+  	alignSelf: "center",
+  	alignItems: "center",
+  	bottom: 0,
+  	paddingBottom: 20,
   }
 });
 
