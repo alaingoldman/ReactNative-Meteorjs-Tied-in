@@ -14,6 +14,7 @@ import Register from  './Register';
 import ddpClient from './ddpClient';
 import Accounts from  './accounts';
 import NavigationBar from 'react-native-navbar'; 
+import Home from './Home';
 
 
 class Login extends React.Component {
@@ -39,13 +40,9 @@ class Login extends React.Component {
 		  		this.state.password );
 		  })
 		  .then((res) => {
-		  	console.log("Logged in successfull");
-		  	this.props.navigator.push({
-		  		component: Aboutios
-		  	});
+		  	this.props.navigator.immediatelyResetRouteStack([{component: Home}]);
 		  })
 		  .catch((err) => {
-		    console.log(err);
 		    var newState = {};
 		    newState["alert"] = err.reason;
 		    return this.setState(newState);
@@ -76,21 +73,21 @@ class Login extends React.Component {
 				  title={titleConfig}
 				  tintColor="transparent"/>
 				<View style={styles.wrap}>
-				    <Image 
-				      resizeMode="cover"
-				      source={require('./logoalt.png')} 
-				      style={styles.logo}/>
-					<View style={styles.introTextWrap}>
-						<Text style={styles.introText}>
-							Lootfly is the premier marketplace for fashion
-						</Text>
-						<Text style={styles.introText}>
-							Login to start buying and selling
-						</Text>
-					</View>
-				  	<Text style={styles.alert}>
-				  	 	{this.state.alert}
-				  	</Text>
+			  	    <Image 
+			  	      resizeMode="cover"
+			  	      source={require('./logoalt.png')} 
+			  	      style={styles.logo}/>
+			  		<View style={styles.introTextWrap}>
+			  			<Text style={styles.introText}>
+			  				Lootfly is the premier marketplace for fashion
+			  			</Text>
+			  			<Text style={styles.introText}>
+			  				Login to start buying and selling
+			  			</Text>
+			  		</View>
+			  	  	<Text style={styles.alert}>
+			  	  	 	{this.state.alert}
+			  	  	</Text>
 				  	<View style={styles.boxer}>
 				  		<Text style={styles.inputTitle}>E-mail</Text>
 					    <TextInput 
@@ -151,7 +148,9 @@ var styles = StyleSheet.create({
   },
   wrap: {
 	flex: 1,
-	width: 280,
+	alignSelf: "stretch",
+	marginLeft: 20,
+	marginRight: 20,
   },
   boxer: {
   	borderBottomWidth: 1,
@@ -200,12 +199,11 @@ var styles = StyleSheet.create({
   	alignSelf: "center",
   },
   bot: {
-  	width: 280,
-  	position: "absolute",
-  	alignSelf: "center",
-  	alignItems: "center",
-  	bottom: 0,
+  	flex:1,
+  	alignItems: "flex-end",
+  	justifyContent: "flex-end",
   	paddingBottom: 20,
+
   }
 });
 
