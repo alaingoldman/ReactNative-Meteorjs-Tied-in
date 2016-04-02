@@ -73,33 +73,31 @@ class ResetPass extends React.Component {
 				    leftButton={leftButtonConfig} />
 				</View>
 				<View style={styles.midder}>
-					<View style={styles.wrap}>
-					  	<Text style={styles.alert}>
-					  	 	{this.state.alert}
-					  	</Text>
-					  	<View style={styles.boxer}>
-					  		<Text style={styles.inputTitle}>E-mail</Text>
-							<TextInput 
-							    style={styles.input} 
-							    keyboardType='email-address'
-							    value={this.state.email}
-							    onChange={this._handleChange.bind(this,"email")}
-							    autoCorrect={false} />
-						</View>
-						
-						<TouchableHighlight
-						    onPress={this._handlePress.bind(this)}
-						    style={styles.butt}
-						    activeOpacity={1}
-						    underlayColor='#0d0d0d'>
-						  <Text style={styles.buttInner}>
-						  	REGISTER
-						  </Text>
-						</TouchableHighlight>
-						<Text style={styles.introText}>
-							Reset instructions will be emailed to you
-						</Text>
-					</View>
+  		  	<Text style={styles.alert}>
+  		  	 	{this.state.alert}
+  		  	</Text>
+  		  	<View style={styles.boxer}>
+  		  		<Text style={styles.inputTitle}>E-mail</Text>
+  				<TextInput 
+  				    style={styles.input} 
+  				    keyboardType='email-address'
+  				    value={this.state.email}
+  				    onChange={this._handleChange.bind(this,"email")}
+  				    autoCorrect={false} />
+  			</View>
+  			
+  			<TouchableHighlight
+  			    onPress={this._handlePress.bind(this)}
+  			    style={styles.butt}
+  			    activeOpacity={1}
+  			    underlayColor='#0d0d0d'>
+  			  <Text style={styles.buttInner}>
+  			  	REGISTER
+  			  </Text>
+  			</TouchableHighlight>
+  			<Text style={styles.introText}>
+  				Reset instructions will be emailed to you
+  			</Text>
 				</View>
 			</Image>
 		)
@@ -113,16 +111,14 @@ var styles = StyleSheet.create({
   	alignSelf: "stretch",
   },
   midder: {
-  	alignItems: "center",
-  	marginTop: 20,
+  	flex: 1,
+    alignSelf: "stretch",
+    marginLeft: 20,
+    marginRight: 20,
   },
   navy: {
   	flex: 1,
   	backgroundColor: "red",
-  },
-  wrap: {
-  	flex: 1,
-  	width: 280,
   },
   boxer: {
     borderBottomWidth: 1,

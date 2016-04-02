@@ -149,7 +149,11 @@ var styles = StyleSheet.create({
   	alignSelf: "stretch",
   },
   midder: {
-  	alignItems: "center",
+  	flex: 1,
+  	alignItems: "stretch",
+  	alignSelf: "stretch",
+  	marginLeft: 20,
+  	marginRight: 20,
   },
   navy: {
   	flex: 1,
@@ -157,7 +161,6 @@ var styles = StyleSheet.create({
   },
   wrap: {
   	flex: 1,
-  	width: 280,
   },
   boxer: {
     borderBottomWidth: 1,
@@ -220,11 +223,9 @@ var styles = StyleSheet.create({
   	marginTop: 10,
   },
   bot: {
-  	width: 280,
-  	position: "absolute",
-  	alignSelf: "center",
-  	alignItems: "center",
-  	bottom: 0,
+  	flex:1,
+  	alignItems: "flex-end",
+  	justifyContent: "flex-end",
   	paddingBottom: 20,
   }
 });
