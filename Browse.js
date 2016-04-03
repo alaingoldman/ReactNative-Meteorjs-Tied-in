@@ -18,7 +18,7 @@ import NavigationBar from 'react-native-navbar';
 import DrawerLayout from 'react-native-drawer-layout';
 
 
-class Home extends React.Component {
+class Browse extends React.Component {
 
   _handleChange(x, event) {
     var newState = {};
@@ -118,4 +118,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = Home;
+module.exports = Browse;

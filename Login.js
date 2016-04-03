@@ -14,7 +14,7 @@ import Register from  './Register';
 import ddpClient from './ddpClient';
 import Accounts from  './accounts';
 import NavigationBar from 'react-native-navbar'; 
-import Home from './Home';
+import Browse from './Browse';
 
 
 class Login extends React.Component {
@@ -40,7 +40,7 @@ class Login extends React.Component {
 		  		this.state.password );
 		  })
 		  .then((res) => {
-		  	this.props.navigator.immediatelyResetRouteStack([{component: Home}]);
+		  	this.props.navigator.immediatelyResetRouteStack([{component: Browse}]);
 		  })
 		  .catch((err) => {
 		    var newState = {};
