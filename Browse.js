@@ -32,7 +32,13 @@ class Browse extends React.Component {
   render() {
     const leftButtonConfig = 
       <View>
-          <Text style={styles.whiteArrow} onPress={this._openShelf.bind(this)} > {'|||'} </Text>
+        <TouchableHighlight
+            onPress={this._openShelf.bind(this)}
+            activeOpacity={1}
+            underlayColor='#0d0d0d'>
+            <Image resizeMode="cover"
+              source={require('./ic_navigation_drawer.png')} style={styles.burger}/>
+        </TouchableHighlight>
       </View>;
 
     const titleConfig =
@@ -44,16 +50,16 @@ class Browse extends React.Component {
         <Image source={require('./dash.png')} style={styles.container}>
           <View style={styles.siteWrap}>
             <Image 
-              resizeMode="cover"
+              resizeMode="stretch"
               source={require('./logoalt.png')} 
               style={styles.logo}/>
-            <Text style={styles.sidebarLink}> Browse </Text>
-            <Text style={styles.sidebarLink}> Messages </Text>
-            <Text style={styles.sidebarLink}> Listings </Text>
-            <Text style={styles.sidebarLink}> Orders </Text>
+            <Text style={styles.sidebarLink}> Browse    </Text>
+            <Text style={styles.sidebarLink}> Messages  </Text>
+            <Text style={styles.sidebarLink}> Listings  </Text>
+            <Text style={styles.sidebarLink}> Orders    </Text>
             <Text style={styles.sidebarLink}> Purchases </Text>
-            <Text style={styles.sidebarLink}> Settings </Text>
-            <Text style={styles.sidebarLink}> Logout </Text>
+            <Text style={styles.sidebarLink}> Settings  </Text>
+            <Text style={styles.sidebarLink}> Logout    </Text>
           </View>
         </Image>);
 
@@ -93,7 +99,11 @@ var styles = StyleSheet.create({
     height: 30,
     marginTop: 90,
     marginBottom: 15,
-
+  },
+  burger: {
+    marginLeft: 10,
+    height: 22,
+    width: 23,
   },
   container: {
     flex: 1,
