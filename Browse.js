@@ -111,12 +111,6 @@ var styles = StyleSheet.create({
     height: null,
     alignItems: "center",
   },  
-  whiteArrow: {
-    color: "white",
-    fontSize: 22,
-    marginTop: -5,
-    marginLeft: 10,
-  },
   navTitleText: {
     color: "white",
     fontSize: 18,
