@@ -11,14 +11,14 @@ var {
 
 import NavigationBar from 'react-native-navbar'; 
 import DrawerLayout from 'react-native-drawer-layout';
+import Browse from './Browse';
 import Messages from './Messages';
 import Listings from './Listings';
 import Orders from './Orders';
-import Purchases from './Purchases';
 import Settings from './Settings';
 import AccountPage from './AccountPage';
 
-class Browse extends React.Component {
+class Purchases extends React.Component {
 
   _handleChange(x, event) {
     var newState = {};
@@ -49,7 +49,7 @@ class Browse extends React.Component {
 
     const titleConfig =
       <View>
-          <Text style={styles.navTitleText}>Browse</Text>
+          <Text style={styles.navTitleText}>Purchases</Text>
       </View>;
 
     const navigationView = (
@@ -129,4 +129,4 @@ var styles = StyleSheet.create({
   }
 });
 
-export default Browse;
+export default Purchases;
