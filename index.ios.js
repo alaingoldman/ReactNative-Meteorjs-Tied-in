@@ -3,7 +3,7 @@ var React = require('react-native');
 var {
   AppRegistry,
   StyleSheet,
-  StatusBarIOS,
+  StatusBar,
   Navigator,
   View,
 } = React;
@@ -11,10 +11,6 @@ var {
 
 import Login from './Login';
 import NavigationBar from 'react-native-navbar'; // for better navbar control
-import WhiteStatus from './WhiteStatusIos'; 
-// keeps status bar white; supposedly
-// http://stackoverflow.com/questions/34058371/statusbarios-color-change-on-page-load-in-react-native
-
 global.process = require("./process.polyfill");
 
 
@@ -23,9 +19,6 @@ function renderScene(route, navigator) {
 }
 
 class AppWrapper extends React.Component{
-  componentWillMount() {
-    return StatusBarIOS.setStyle(1);
-  }
 
   componentWillUnmount() {
     ddpClient.close();
@@ -38,6 +31,10 @@ class AppWrapper extends React.Component{
 
     return(
       <View style={styles.container}>
+      <StatusBar
+        backgroundColor="blue"
+        barStyle="light-content"
+      />
       <Navigator 
         initialRoute={initialRoute}
         renderScene={renderScene}  />
