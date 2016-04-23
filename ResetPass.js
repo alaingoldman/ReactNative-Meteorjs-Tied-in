@@ -37,10 +37,11 @@ class ResetPass extends React.Component {
 		  	newState["alert"] = "reset sent to email";
 		  	return this.setState(newState);
 		  })
-		  .catch((err) => {
+		  .catch((err, reject) => {
 		    var newState = {};
-		    newState["alert"] = err.reason;
-		    return this.setState(newState);
+		    newState["alert"] = err;
+        if(err.reason){newState["alert"] = err.reason;}
+        return this.setState(newState);
 		  })
 	}
 

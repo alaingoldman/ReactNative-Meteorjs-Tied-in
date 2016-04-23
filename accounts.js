@@ -89,16 +89,7 @@ Accounts.emailVerify = (email) => {
 };
 
 Accounts.forgotPass = (email) => {
-  return new Promise((resolve, reject) => {
-    ddpClient.call("resetPass", [email], (err, res) => {
-      if (err) {
-        console.log('err', err);
-      } else {
-        console.log("success?");
-      }
-    });
-    resolve(true);
-  });
+  return ddpClient.connection.call("resetPass", [email]);
 };
 
 Accounts.signUpWithUsername = (username, email, password) => {
